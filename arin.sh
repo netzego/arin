@@ -60,50 +60,14 @@ log "luks_path ${LUKS_PATH}"
 source "${SCRIPTDIR}/inc/mkfs_esp.sh"
 mkfs_esp
 
-# source "${SCRIPTDIR}/inc/create_luks.sh"
-function create_luks() {
-    # TODO warning
-    cryptsetup \
-        --verbose \
-        --batch-mode \
-        --type luks2 \
-        luksFormat "${LUKS_PATH}" "${KEYFILE}"
-    partprobe "${VOLUME}"
-    sync
-}
+source "${SCRIPTDIR}/inc/create_luks.sh"
 create_luks
 
 source "${SCRIPTDIR}/inc/open_luks.sh"
 open_luks
 declare -gr ROOT_PATH="/dev/mapper/${MAPNAME}"
 
-function mkfs_btrfs() {
-    declare subvol
-    declare subdir
-    mkfs.btrfs -f "${ROOT_PATH}"
-    # <FS-ROOT>
-    mount -o "${BTRFS_MOUNT_OPTIONS}" "${ROOT_PATH}" "${MOUNTDIR}"
-    for s in "${BTRFS_SUBVOLUMES[@]}"; do
-        subvol=$(echo "${s}" | cut -d: -f1)
-        btrfs -v subvol create "${MOUNTDIR}/${subvol}"
-    done
-    btrfs -v subvolume set-default "${MOUNTDIR}/@rootfs"
-    umount -v "${MOUNTDIR}"
-
-    # @rootfs
-    mount -o "${BTRFS_MOUNT_OPTIONS}" "${ROOT_PATH}" "${MOUNTDIR}"
-    for s in "${BTRFS_SUBVOLUMES[@]}"; do
-        local subvol=$(echo "${s}" | cut -d: -f1)
-        local subdir=$(echo "${s}" | cut -d: -f2)
-        [[ "${subvol}" = "@rootfs" ]] && continue
-        mkdir -vp "${MOUNTDIR}/${subdir}"
-        mount -o "${BTRFS_MOUNT_OPTIONS},subvol=${subvol}" "${ROOT_PATH}" "${MOUNTDIR}/${subdir}"
-    done
-
-    findmnt --raw -t btrfs -R "${ROOT_PATH}"
-
-    umount -v -R "${MOUNTDIR}"
-}
+source "${SCRIPTDIR}/inc/mkfs_btrfs.sh"
 mkfs_btrfs
 
 source "${SCRIPTDIR}/inc/mount_btrfs.sh"
@@ -116,28 +80,41 @@ source "${SCRIPTDIR}/inc/mount_esp.sh"
 mount_esp
 
 declare -gr UUID_ESP="$(lsblk -rno UUID "${ESP_PATH}")"
-declare -gr UUID_LUKS="$(lsblk -rno UUID "${LUKS_PATH}")"
-declare -gr UUID_ROOT="$(lsblk --nodeps -rno UUID "${ROOT_PATH}")"
+declare -gr UUID_LUKS="$(lsblk -rno UUID,FSTYPE "${LUKS_PATH}" | grep -m1 "crypto_LUKS" | cut -d' ' -f1)"
+declare -gr UUID_ROOT="$(lsblk -rno UUID,FSTYPE "${ROOT_PATH}" | grep -m1 "btrfs" | cut -d' ' -f1)"
+
+log "${UUID_LUKS}"
+log "${UUID_ROOT}"
 
 source "${SCRIPTDIR}/inc/install_packages.sh"
 install_packages
 
 tree -L1 -d "${MOUNTDIR}"
 
-# source "${SCRIPTDIR}/inc/copy_skeleton.sh"
-# copy_skeleton
-
 source "${SCRIPTDIR}/inc/generate_fstab.sh"
 generate_fstab
 
-# generate_locale
-# firstboot
-# bootloader
-# gen_cmdline
-# configure_initrd
-# gen_initrd
+source "${SCRIPTDIR}/inc/gen_locale.sh"
+gen_locale
 
-# source "${SCRIPTDIR}/inc/@@.sh"
-# @@
+source "${SCRIPTDIR}/inc/firstboot.sh"
+firstboot
+
+source "${SCRIPTDIR}/inc/install_bootloader.sh"
+install_bootloader
+
+source "${SCRIPTDIR}/inc/gen_cmdline.sh"
+gen_cmdline "${UUID_LUKS}" "${UUID_ROOT}"
+
+source "${SCRIPTDIR}/inc/configure_initrd.sh"
+configure_initrd
+
+source "${SCRIPTDIR}/inc/gen_initrd.sh"
+gen_initrd
+
+# source "${SCRIPTDIR}/inc/copy_skeleton.sh"
+# copy_skeleton
+
+log "C O N G R A T S"
 
 exit 0
