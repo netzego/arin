@@ -1,0 +1,12 @@
+# arin core packages
+base
+btrfs-progs
+dosfstools
+gptfdisk
+linux-firmware
+linux-lts
+mkinitcpio
+openssh
+python
+rsync
+vi
