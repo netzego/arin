@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2155,SC2034
 
-declare -gr WIPE="${WIPE:-no}"
-declare -gr CREATE_WIN="${CREATE_WIN:-no}"
-
 declare -gr RNDNR="$(uuidgen -t | tr -d '-')"
 declare -gr WORKDIR=".workdir-${RNDNR}"
 declare -gr KEYFILE="arin.keyfile"
@@ -38,3 +35,12 @@ declare -gra BTRFS_SUBVOLUMES=(
     "@srv:/srv"
     "@swap:/swap"
 )
+
+declare -gr WIPE="${WIPE:-no}"
+declare -gr CREATE_WIN="${CREATE_WIN:-no}"
+declare -gr LOCALE="${LOCALE:-en_US.UTF-8}"
+declare -gr TIMEZONE="${TIMEZONE:-Europe/Berlin}"
+declare -gr KEYMAP="${KEYMAP:-us}"
+declare -gr NODENAME="${NODENAME:-arin}"
+declare -gr CMDLINE_EXTRA="${CMDLINE_EXTRA:-ipv6.disable=1}"
+declare -gr DEFAULT_SHELL="${DEFAULT_SHELL:-/usr/bin/bash}"
