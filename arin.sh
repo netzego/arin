@@ -9,9 +9,9 @@ declare -gr SCRIPTNAME="$(basename "${BASH_ARGV0}")"
 declare -gr SCRIPTDIR="$(dirname "$(realpath "${BASH_ARGV0}")")"
 
 source "${SCRIPTDIR}/inc/utils.sh"
-source "${SCRIPTDIR}/inc/findconf.sh" # TODO merge w/ utils.sh
+# source "${SCRIPTDIR}/inc/findconf.sh" # TODO merge w/ utils.sh
 # shellcheck disable=SC1090,SC2312
-source "$(findconf arin.config)"
+source "${SCRIPTDIR}/arin.config"
 source "${SCRIPTDIR}/inc/vars.sh"
 
 if ((UID != 0)); then
@@ -40,8 +40,9 @@ log "VOLUME = ${VOLUME}"
 
 mkdir -p "${WORKDIR}/mnt"
 
-# source "${SCRIPTDIR}/inc/wipe_disk.sh"
-# wipe_disk
+# TODO warning
+# source "${SCRIPTDIR}/inc/erase_disk.sh"
+# erase_disk
 
 source "${SCRIPTDIR}/inc/repart.sh"
 repart
@@ -56,9 +57,6 @@ if [[ -z "${LUKS_PATH}" ]] || [[ ! -e "${LUKS_PATH}" ]]; then
 fi
 log "esp_path ${ESP_PATH}"
 log "luks_path ${LUKS_PATH}"
-
-source "${SCRIPTDIR}/inc/mkfs_esp.sh"
-mkfs_esp
 
 source "${SCRIPTDIR}/inc/create_luks.sh"
 create_luks
@@ -76,6 +74,9 @@ mount_btrfs
 source "${SCRIPTDIR}/inc/swapfile.sh"
 swapfile
 
+source "${SCRIPTDIR}/inc/mkfs_esp.sh"
+mkfs_esp
+
 source "${SCRIPTDIR}/inc/mount_esp.sh"
 mount_esp
 
@@ -83,6 +84,7 @@ declare -gr UUID_ESP="$(lsblk -rno UUID "${ESP_PATH}")"
 declare -gr UUID_LUKS="$(lsblk -rno UUID,FSTYPE "${LUKS_PATH}" | grep -m1 "crypto_LUKS" | cut -d' ' -f1)"
 declare -gr UUID_ROOT="$(lsblk -rno UUID,FSTYPE "${ROOT_PATH}" | grep -m1 "btrfs" | cut -d' ' -f1)"
 
+log "${UUID_ESP}"
 log "${UUID_LUKS}"
 log "${UUID_ROOT}"
 
@@ -115,6 +117,14 @@ gen_initrd
 # source "${SCRIPTDIR}/inc/copy_skeleton.sh"
 # copy_skeleton
 
-log "C O N G R A T S"
+# configure_networkd
+# configure_timesyncd
+# configure_sshd
+# copy_sshkeys
+
+# add_user -- not implemented
+# remove_pam_securetty -- not implemented; needed for nspawn
+
+log "~~~ C O N G R A T S ~~~"
 
 exit 0
