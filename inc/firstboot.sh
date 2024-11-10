@@ -8,7 +8,8 @@ firstboot() {
     declare -r hostname="${NODENAME}"
     declare -r keymap="${KEYMAP}"
     declare -r shell="${DEFAULT_SHELL}"
-    declare -r hashfile="${SCRIPTDIR}/arin.roothash"
+    # declare -r hashfile="${SCRIPTDIR}/arin.roothash"
+    declare -r hash="$(cat ${SCRIPTDIR}/arin.roothash)"
     # declare -r cmdline="rd.luks.name=${luks_uuid}=root root=UUID=${root_uuid} rw ${CMDLINE_EXTRA}"
 
     if [[ ! -f "${hashfile}" ]]; then
@@ -17,8 +18,8 @@ firstboot() {
 
     systemd-firstboot \
         --force \
-        --root "${rootfs}" \
-        --root-password-hashed="$(cat "${hashfile}")" \
+        --root="${rootfs}" \
+        --root-password-hashed="${hash}" \
         --locale="${locale}" \
         --root-shell="${shell}" \
         --timezone="${timezone}" \
