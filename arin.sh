@@ -91,8 +91,6 @@ log "${UUID_ROOT}"
 source "${SCRIPTDIR}/inc/install_packages.sh"
 install_packages
 
-tree -L1 -d "${MOUNTDIR}"
-
 source "${SCRIPTDIR}/inc/generate_fstab.sh"
 generate_fstab
 
