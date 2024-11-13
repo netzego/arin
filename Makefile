@@ -1,0 +1,31 @@
+SHELL        := bash
+.SHELLFLAGS  := -eu -o pipefail -c
+MAKEFLAGS    += --warn-undefined-variables
+MAKEFLAGS    += --no-builtin-rules
+SCRIPTNAME   := arin.sh
+BATS_OPTIONS := --verbose-run --show-output-of-passing-tests
+BATS_GLOB    ?=
+LOGFILE		 ?= logfile
+IMAGE		 ?= testfiles/test.img
+
+.PHONY: \
+	check \
+	debug \
+	test \
+	watch \
+	run
+
+check: $(SCRIPTNAME)
+	shellcheck -x --enable=all $<
+
+test: tests/
+	@bats $(BATS_OPTIONS) -r tests/$(BATS_GLOB)
+
+run: $(SCRIPTNAME)
+	bash $< testfiles/test.img |& tee -p $(LOGFILE)
+
+debug: $(SCRIPTNAME)
+	bash -x $< $(IMAGE) |& tee -p $(LOGFILE)
+
+arin.roothash:
+	@openssl passwd -6 >$@
