@@ -2,7 +2,7 @@
 # shellcheck disable=SC2155,SC2034
 
 declare -gr RNDNR="$(uuidgen -t | tr -d '-')"
-declare -gr WORKDIR=".workdir-${RNDNR}"
+declare -gr WORKDIR="$(mktemp -d -p /tmp "${SCRIPTNAME}.workdir-XXXXXXXX")"
 declare -gr KEYFILE="arin.keyfile"
 declare -gr MAPNAME="rootfs-${RNDNR}"
 declare -gr MOUNTDIR="${WORKDIR}/mnt"
