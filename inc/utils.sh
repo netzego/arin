@@ -18,16 +18,16 @@ check_mountpoint() {
     declare -r mntpoint="${1}"
 
     if [[ ! -d "${mntpoint}" ]]; then
-        die 1 "\`${mntpoint}' is not a directory"
+        err 1 "\`${mntpoint}' is not a directory"
     fi
 
     # shellcheck disable=SC2312
     if [[ -n "$(ls -1A "${mntpoint}")" ]]; then
-        die 1 "\`${mntpoint}' directory is not empty"
+        err 1 "\`${mntpoint}' directory is not empty"
     fi
 
     if mountpoint "${mntpoint}"; then
-        die 1 "\`${mntpoint}' is already a mountpoint"
+        err 1 "\`${mntpoint}' is already a mountpoint"
     fi
 }
 
@@ -48,11 +48,11 @@ filearray() {
     declare -ar files=("$@")
 
     if [ ${#files} -lt 1 ]; then
-        die 1 "missing at least one filename"
+        err 1 "missing at least one filename"
     fi
 
     if [ ! -f "${files[0]}" ]; then
-        die 1 "\`${files[0]}' do not exists"
+        err 1 "\`${files[0]}' do not exists"
     fi
 
     # grep -v: inverts the matching patterns
