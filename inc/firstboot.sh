@@ -9,7 +9,8 @@ firstboot() {
     declare -r keymap="${KEYMAP}"
     declare -r shell="${DEFAULT_SHELL}"
     declare -r hash="$(cat ${SCRIPTDIR}/arin.roothash)"
-    # declare -r cmdline="rd.luks.name=${luks_uuid}=root root=UUID=${root_uuid} rw ${CMDLINE_EXTRA}" if [[ ! -f "${SCRIPTDIR}/arin.roothash" ]]; then
+    # declare -r cmdline="rd.luks.name=${luks_uuid}=root root=UUID=${root_uuid} rw ${CMDLINE_EXTRA}"
+    if [[ ! -f "${SCRIPTDIR}/arin.roothash" ]]; then
         err 3 "\`arin.roothash' does not exists"
     fi
 
