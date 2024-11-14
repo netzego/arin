@@ -1,4 +1,7 @@
 arin.roothash
 arin.keyfile
-testfiles/*.img
+**/*.img
+**/*.fd
+**/*.iso
+**/*.sig
 logfile
