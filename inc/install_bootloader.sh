@@ -11,6 +11,5 @@ function install_bootloader() {
     bootctl --root="${rootfs}" --esp-path=/efi --install-source=image install
 
     # systemd-nspawn -D "${rootfs}" bootctl status
-
     # systemd-nspawn -D "${rootfs}" bootctl list
 }
