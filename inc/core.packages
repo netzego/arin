@@ -2,6 +2,7 @@
 base
 btrfs-progs
 dosfstools
+efibootmgr
 gptfdisk
 iptables-nft
 linux-firmware
