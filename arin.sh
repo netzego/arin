@@ -31,7 +31,7 @@ if [[ ! -e ${VOLUME} ]]; then
     err 255 "VOLUME not exist"
 fi
 if [[ -f ${VOLUME} ]]; then
-    VOLUME="$(losetup --show --find "${VOLUME}")"
+    VOLUME="$(losetup --show --find --partscan "${VOLUME}")"
     partprobe "${VOLUME}"
     sync
 fi
