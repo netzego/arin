@@ -31,7 +31,7 @@ if [[ ! -e ${VOLUME} ]]; then
     err 255 "VOLUME not exist"
 fi
 if [[ -f ${VOLUME} ]]; then
-    VOLUME="$(losetup --show --find --partscan "${VOLUME}")"
+    VOLUME="$(losetup --show --find "${VOLUME}")"
     partprobe "${VOLUME}"
     sync
 fi
@@ -100,6 +100,9 @@ gen_locale
 source "${SCRIPTDIR}/inc/firstboot.sh"
 firstboot
 
+source "${SCRIPTDIR}/inc/install_bootloader.sh"
+install_bootloader
+
 source "${SCRIPTDIR}/inc/gen_cmdline.sh"
 gen_cmdline "${UUID_LUKS}" "${UUID_ROOT}"
 
@@ -108,9 +111,6 @@ configure_initrd
 
 source "${SCRIPTDIR}/inc/gen_initrd.sh"
 gen_initrd
-
-source "${SCRIPTDIR}/inc/install_bootloader.sh"
-install_bootloader
 
 # source "${SCRIPTDIR}/inc/copy_skeleton.sh"
 # copy_skeleton
