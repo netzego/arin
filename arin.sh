@@ -118,10 +118,12 @@ configure_networkd
 source "${SCRIPTDIR}/inc/configure_timesyncd.sh"
 configure_timesyncd
 
-# configure_networkd
-# configure_timesyncd
-# configure_sshd
-# copy_sshkeys
+# sshd
+source "${SCRIPTDIR}/inc/configure_sshd.sh"
+configure_sshd
+
+source "${SCRIPTDIR}/inc/copy_sshkey.sh"
+copy_sshkey
 
 # add_user -- not implemented
 # remove_pam_securetty -- not implemented; needed for nspawn
