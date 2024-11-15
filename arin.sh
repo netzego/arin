@@ -112,8 +112,11 @@ configure_initrd
 source "${SCRIPTDIR}/inc/gen_initrd.sh"
 gen_initrd
 
-# source "${SCRIPTDIR}/inc/copy_skeleton.sh"
-# copy_skeleton
+source "${SCRIPTDIR}/inc/configure_networkd.sh"
+configure_networkd
+
+source "${SCRIPTDIR}/inc/configure_timesyncd.sh"
+configure_timesyncd
 
 # configure_networkd
 # configure_timesyncd
