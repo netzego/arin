@@ -8,6 +8,7 @@ function generate_fstab() {
         sed "s@${mountpoint}/*@/@" |
         sed "s@${ROOT_PATH}@UUID=${UUID_ROOT}@" |
         sed "s@${ESP_PATH}@UUID=${UUID_ESP}@" |
+        sed "s@22@77@g" |
         cat - <(echo "/swap/swapfile none swap defaults 0 0") |
         tee "${mountpoint}/etc/fstab"
 
