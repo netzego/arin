@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function configure_network() {
+function configure_networkd() {
     declare -r rootfs="${1:-$MOUNTDIR}"
 
     systemd-nspawn -D "${rootfs}" systemctl enable systemd-networkd.service
