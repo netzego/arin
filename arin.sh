@@ -9,7 +9,6 @@ declare -gr SCRIPTNAME="$(basename "${BASH_ARGV0}")"
 declare -gr SCRIPTDIR="$(dirname "$(realpath "${BASH_ARGV0}")")"
 
 source "${SCRIPTDIR}/inc/utils.sh"
-# source "${SCRIPTDIR}/inc/findconf.sh" # TODO merge w/ utils.sh
 # shellcheck disable=SC1090,SC2312
 source "${SCRIPTDIR}/arin.config"
 source "${SCRIPTDIR}/inc/vars.sh"
