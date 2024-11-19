@@ -21,8 +21,8 @@ if (($# != 1)); then
     err 2 "usage: ${SCRIPTNAME} VOLUME"
 fi
 
-source "${SCRIPTDIR}/inc/cleanup.sh"
-trap cleanup EXIT
+source "${SCRIPTDIR}/inc/onexit.sh"
+trap onexit EXIT
 
 # set $VOLUME
 declare -g VOLUME="${1:-${VOLUME:-""}}"
