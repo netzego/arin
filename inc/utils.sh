@@ -14,18 +14,16 @@ function err() {
     exit "${exitcode}"
 }
 
-check_mountpoint() {
+function check_mountpoint() {
     declare -r mntpoint="${1}"
 
     if [[ ! -d "${mntpoint}" ]]; then
         err 1 "\`${mntpoint}' is not a directory"
     fi
-
     # shellcheck disable=SC2312
     if [[ -n "$(ls -1A "${mntpoint}")" ]]; then
         err 1 "\`${mntpoint}' directory is not empty"
     fi
-
     if mountpoint "${mntpoint}"; then
         err 1 "\`${mntpoint}' is already a mountpoint"
     fi
@@ -42,16 +40,17 @@ check_mountpoint() {
 #       if `${@[1]}` do not exists
 # EXPL: filearray "VARNAME" "a.foo" [ "not.exists" "b.bar" ... ]
 # TODO: write tests
-filearray() {
+function filearray() {
     declare -r varname="$1"
     shift
     declare -ar files=("$@")
 
-    if [ ${#files} -lt 1 ]; then
+    # BUGFIX in utils-v2.sh
+    if [[ ${#files} -lt 1 ]]; then
         err 1 "missing at least one filename"
     fi
 
-    if [ ! -f "${files[0]}" ]; then
+    if [[ ! -f "${files[0]}" ]]; then
         err 1 "\`${files[0]}' do not exists"
     fi
 
