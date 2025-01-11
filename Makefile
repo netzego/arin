@@ -28,4 +28,4 @@ debug: $(SCRIPTNAME)
 	bash -x $< $(IMAGE) |& tee -p $(LOGFILE)
 
 arin.roothash:
-	@openssl passwd -6 >$@
+	@mkpasswd -m yescrypt >$@
