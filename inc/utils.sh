@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+set -o errexit
+set -o nounset
+set -o pipefail
+set -o xtrace
+
 declare -gr LOG_PREFIX="---"
 declare -gr ERROR_PREFIX="***"
 
@@ -45,17 +50,18 @@ function filearray() {
     shift
     declare -ar files=("$@")
 
-    # BUGFIX in utils-v2.sh
-    if [[ ${#files} -lt 1 ]]; then
-        err 1 "missing at least one filename"
+    if ((${#files[@]} < 1)); then
+        err 30 "'\${#files[#]}' is less then 1."
     fi
 
-    if [[ ! -f "${files[0]}" ]]; then
-        err 1 "\`${files[0]}' do not exists"
+    if [[ ! -f ${files[0]} ]]; then
+        err 31 "'\${files[0]}' do not exists"
     fi
 
     # grep -v: inverts the matching patterns
     # grep -s: suppress errors. in case `$2` do not exists.
     # grep -h: suppress filenames in the output.
-    declare -agr "${varname}"="$(grep -shv "^#\|^\$" "${files[@]}" | sort -u)"
+    declare -agr "${varname}"="$(grep -shv "^#\|^\$" "${files[@]}")"
 }
+# filearray ARR test.filearray # TODO remove me
+# echo "${ARR[@]}" # TODO remove me. iam here for poor debuging :-)
