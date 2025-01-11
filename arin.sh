@@ -13,6 +13,9 @@ source "${SCRIPTDIR}/inc/utils.sh"
 source "${SCRIPTDIR}/arin.config"
 source "${SCRIPTDIR}/inc/vars.sh"
 
+source "${SCRIPTDIR}/inc/onexit.sh"
+trap onexit EXIT
+
 if ((UID != 0)); then
     err 2 "permission error"
 fi

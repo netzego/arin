@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2154
 
-function cleanup() {
+function onexit() {
     if [[ ${VOLUME} == /dev/loop* ]]; then
         losetup -d "${VOLUME}"
     fi
