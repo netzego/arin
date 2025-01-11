@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 declare -gr LOG_PREFIX="---"
-declare -gr ERROR_PREFIX="~~~"
+declare -gr ERROR_PREFIX="***"
 
 function log() {
     echo "${LOG_PREFIX} ${*}"
