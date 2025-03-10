@@ -39,7 +39,7 @@ declare -gra BTRFS_SUBVOLUMES=(
 )
 
 declare -gr BATCH="${BATCH:-no}"
-declare -gr WIPE="${WIPE:-no}"
+declare -gr WIPE_DISK="${WIPE_DISK:-no}"
 declare -gr RANDOMIZE_LINUXROOT="${RANDOMIZE_LINUXROOT:-yes}"
 # declare -gr CREATE_WIN="${CREATE_WIN:-no}"
 declare -gr LOCALE="${LOCALE:-en_US.UTF-8}"

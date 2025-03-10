@@ -8,7 +8,7 @@ function has_part() {
 
 # shellcheck disable=SC2317,SC2086
 function repart() {
-    if [[ "${WIPE}" == "yes" ]]; then
+    if [[ "${WIPE_DISK}" == "yes" ]]; then
         log "${VOLUME}: zapp gpt table"
         sgdisk -Z "${VOLUME}"
     fi
