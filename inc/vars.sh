@@ -29,7 +29,7 @@ declare -gra BTRFS_SUBVOLUMES=(
     "@log:/var/log"
     "@machines:/var/lib/machines"
     "@portables:/var/lib/portables"
-    "@pkgs:/var/cache/pacman/pkgs"
+    "@pkg:/var/cache/pacman/pkg"
     #"@root:/root"
     "@snapshots:/snapshots"
     "@srv:/srv"
