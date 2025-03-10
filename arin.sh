@@ -60,13 +60,14 @@ fi
 source "${SCRIPTDIR}/inc/repart.sh"
 repart
 
+# set ESP_PATH and LUKS_PATH
 declare -gr LUKS_PATH="$(lsblk -rno PATH,PARTTYPENAME "${VOLUME}" | grep -m1 'Linux\\x20root' | cut -d' ' -f1)"
 declare -gr ESP_PATH="$(lsblk -rno PATH,PARTTYPENAME ${VOLUME} | grep -m1 'EFI\\x20System' | cut -d' ' -f1)"
 if [[ -z "${ESP_PATH}" ]] || [[ ! -e "${ESP_PATH}" ]]; then
-    err 64 "ESP_PATH"
+    err 64 "\$ESP_PATH is empty or does not exsist."
 fi
 if [[ -z "${LUKS_PATH}" ]] || [[ ! -e "${LUKS_PATH}" ]]; then
-    err 64 ""
+    err 64 "\$LUKS_PATH is empty or does not exsist."
 fi
 log "esp_path ${ESP_PATH}"
 log "luks_path ${LUKS_PATH}"
