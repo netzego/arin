@@ -5,8 +5,8 @@ MAKEFLAGS    += --no-builtin-rules
 SCRIPTNAME   := arin.sh
 BATS_OPTIONS := --verbose-run --show-output-of-passing-tests
 BATS_GLOB    ?=
-LOGFILE		 ?= logfile
-IMAGE		 ?= testfiles/test.img
+LOGFILE	     ?= logfile
+IMAGE        ?= testfiles/test.img
 
 .PHONY: \
 	check \
@@ -22,7 +22,7 @@ test: tests/
 	@bats $(BATS_OPTIONS) -r tests/$(BATS_GLOB)
 
 run: $(SCRIPTNAME)
-	bash $< testfiles/test.img |& tee -p $(LOGFILE)
+	bash $< $(IMAGE) |& tee -p $(LOGFILE)
 
 debug: $(SCRIPTNAME)
 	bash -x $< $(IMAGE) |& tee -p $(LOGFILE)
