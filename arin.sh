@@ -72,6 +72,9 @@ fi
 log "ESP_PATH='${ESP_PATH}'"
 log "LUKS_PATH='${LUKS_PATH}'"
 
+source "${SCRIPTDIR}/inc/erase_luks.sh"
+erase_luks
+
 source "${SCRIPTDIR}/inc/create_luks.sh"
 create_luks
 
