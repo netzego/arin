@@ -53,9 +53,7 @@ if lsblk -Pno MOUNTPOINT "${VOLUME}" | grep -qv '=""'; then
     err 255 "'${VOLUME}' is mounted"
 fi
 
-# TODO warning
-# source "${SCRIPTDIR}/inc/erase_disk.sh"
-# erase_disk
+mkdir -p "${MOUNTDIR}"
 
 source "${SCRIPTDIR}/inc/repart.sh"
 repart
