@@ -69,8 +69,8 @@ fi
 if [[ -z "${LUKS_PATH}" ]] || [[ ! -e "${LUKS_PATH}" ]]; then
     err 64 "\$LUKS_PATH is empty or does not exsist."
 fi
-log "esp_path ${ESP_PATH}"
-log "luks_path ${LUKS_PATH}"
+log "ESP_PATH='${ESP_PATH}'"
+log "LUKS_PATH='${LUKS_PATH}'"
 
 source "${SCRIPTDIR}/inc/create_luks.sh"
 create_luks
