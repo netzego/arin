@@ -2,7 +2,7 @@
 # shellcheck disable=SC2154
 
 function onexit() {
-    if [[ ${VOLUME} == /dev/loop* ]]; then
+    if [[ ${VOLUME:-} == /dev/loop* ]]; then
         losetup -d "${VOLUME}"
     fi
 
