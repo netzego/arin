@@ -142,6 +142,16 @@ configure_sshd
 source "${SCRIPTDIR}/inc/copy_sshkey.sh"
 copy_sshkey
 
+# source "${SCRIPTDIR}/inc/copy_skeleton.sh"
+function copy_skeleton() {
+    declare -r skel="${SCRIPTDIR}/arin.skeleton"
+
+    if [[ -d "${skel}" ]]; then
+        rsync -av "${skel}/" "${MOUNTDIR}"
+    fi
+}
+copy_skeleton
+
 # add_user -- not implemented
 # remove_pam_securetty -- not implemented; needed for nspawn
 
