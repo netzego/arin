@@ -1,7 +1,9 @@
 An opinionated archlinux installer
 
-# Files
+### Files
+- arin.authorized_keys
 - arin.config
-- arin.luks
-- arin.sshkeys
+- arin.keyfile
 - arin.packages
+- arin.roothash
+- arin.skeleton/
