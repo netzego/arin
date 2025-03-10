@@ -25,8 +25,10 @@ if (($# != 1)); then
     err 2 "usage: ${SCRIPTNAME} VOLUME"
 fi
 
-source "${SCRIPTDIR}/inc/onexit.sh"
-trap onexit EXIT
+declare -g VOLUME="${1:-${VOLUME:-}}"
+
+source "${SCRIPTDIR}/inc/warning.sh"
+warning
 
 # set $VOLUME
 declare -g VOLUME="${1:-${VOLUME:-""}}"
