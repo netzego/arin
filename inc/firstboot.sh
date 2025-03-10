@@ -5,7 +5,6 @@ firstboot() {
     declare -r rootfs="${MOUNTDIR}"
     declare -r locale="${LOCALE}"
     declare -r timezone="${TIMEZONE}"
-    declare -r hostname="${NODENAME}"
     declare -r keymap="${KEYMAP}"
     declare -r shell="${DEFAULT_SHELL}"
     declare -r hash="$(cat ${SCRIPTDIR}/arin.roothash)"
@@ -21,6 +20,6 @@ firstboot() {
         --locale="${locale}" \
         --root-shell="${shell}" \
         --timezone="${timezone}" \
-        --hostname="${hostname}" \
         --keymap="${keymap}"
+    # --hostname="${hostname}" \
 }

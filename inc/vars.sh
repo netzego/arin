@@ -45,6 +45,5 @@ declare -gr RANDOMIZE_LINUXROOT="${RANDOMIZE_LINUXROOT:-yes}"
 declare -gr LOCALE="${LOCALE:-en_US.UTF-8}"
 declare -gr TIMEZONE="${TIMEZONE:-Europe/Berlin}"
 declare -gr KEYMAP="${KEYMAP:-us}"
-declare -gr NODENAME="${NODENAME:-arin}" # use
 declare -gr CMDLINE_EXTRA="${CMDLINE_EXTRA:-}"
 declare -gr DEFAULT_SHELL="${DEFAULT_SHELL:-/usr/bin/bash}"
