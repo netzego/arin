@@ -1,5 +1,10 @@
 An opinionated archlinux installer
 
+### Usage
+```sh
+bash -x ./arin.sh $VOLUME |& tee -p $LOGFILE
+```
+
 ### Files
 - arin.authorized_keys
 - arin.config
