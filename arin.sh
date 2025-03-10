@@ -141,6 +141,6 @@ copy_sshkey
 # add_user -- not implemented
 # remove_pam_securetty -- not implemented; needed for nspawn
 
-log "~~~ C O N G R A T S ~~~"
+log "ARIN HAS FINISHED -- CONGRATS"
 
 exit 0
