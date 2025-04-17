@@ -4,7 +4,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-# set -o xtrace
+#set -o xtrace
 
 declare -gr SCRIPTNAME="$(basename "${BASH_ARGV0}")"
 declare -gr SCRIPTDIR="$(dirname "$(realpath "${BASH_ARGV0}")")"
