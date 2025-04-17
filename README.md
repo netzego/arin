@@ -1,11 +1,12 @@
 An opinionated archlinux installer
 
-<!-- ### Rationale -->
 ### Usage
 ```sh
+resolvectl query archlinux.org
+timedatectl
+mount -o remount,size=4G /run/archiso/cowspace
 bash -x ./arin.sh $VOLUME |& tee -p $LOGFILE
 ```
-<!-- ### Assumptions -->
 
 ### Files
 - arin.authorized_keys
@@ -14,4 +15,7 @@ bash -x ./arin.sh $VOLUME |& tee -p $LOGFILE
 - arin.packages
 - arin.roothash
 - arin.skeleton/
+
+<!-- ### Rationale -->
+<!-- ### Assumptions -->
 <!-- ### Warranty -->
