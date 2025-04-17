@@ -25,10 +25,8 @@ if (($# != 1)); then
     err 2 "usage: ${SCRIPTNAME} VOLUME"
 fi
 
-declare -g VOLUME="${1:-${VOLUME:-}}"
-
 source "${SCRIPTDIR}/inc/warning.sh"
-warning
+warning "$@"
 
 function set_volume() {
     declare -g VOLUME="${1:-${VOLUME:-}}"
