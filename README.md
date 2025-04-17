@@ -1,9 +1,11 @@
 An opinionated archlinux installer
 
+<!-- ### Rationale -->
 ### Usage
 ```sh
 bash -x ./arin.sh $VOLUME |& tee -p $LOGFILE
 ```
+<!-- ### Assumptions -->
 
 ### Files
 - arin.authorized_keys
@@ -12,3 +14,4 @@ bash -x ./arin.sh $VOLUME |& tee -p $LOGFILE
 - arin.packages
 - arin.roothash
 - arin.skeleton/
+<!-- ### Warranty -->
