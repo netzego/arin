@@ -137,7 +137,6 @@ configure_networkd
 source "${SCRIPTDIR}/inc/configure_timesyncd.sh"
 configure_timesyncd
 
-# sshd
 source "${SCRIPTDIR}/inc/configure_sshd.sh"
 configure_sshd
 
