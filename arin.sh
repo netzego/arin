@@ -45,6 +45,8 @@ if [[ -f ${VOLUME} ]]; then
     VOLUME="$(losetup --show --find "${VOLUME}")"
     partprobe "${VOLUME}"
     sync
+elif [[ ! -b ${VOLUME} ]]; then
+    err 255 "'${VOLUME}' is not a block nor a binary file."
 fi
 declare -gr VOLUME
 log "VOLUME='${VOLUME}'"
