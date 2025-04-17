@@ -5,7 +5,7 @@ MAKEFLAGS   += --no-builtin-rules
 OVMF_IMAGE  := OVMF_CODE.4m.fd
 OVMF_VARS   := OVMF_VARS.4m.fd
 ISO         := archlinux-x86_64.iso
-IMAGE       := test.img
+IMAGE       ?= test.img
 IMAGE_SIZE  := 4G
 QARGS       := -M q35 -enable-kvm -cpu host -m 4G -smp 4 -nodefaults -no-user-config
 
