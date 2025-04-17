@@ -3,6 +3,7 @@
 function configure_networkd() {
     declare -r rootfs="${1:-$MOUNTDIR}"
 
+    # TODO: try via `systemd-run`
     systemd-nspawn -D "${rootfs}" systemctl enable systemd-networkd.service
     systemd-nspawn -D "${rootfs}" systemctl enable systemd-resolved.service
 
