@@ -3,9 +3,8 @@
 function configure_networkd() {
     declare -r rootfs="${1:-$MOUNTDIR}"
 
-    # TODO: try via `systemd-run`
-    systemd-nspawn -D "${rootfs}" systemctl enable systemd-networkd.service
-    systemd-nspawn -D "${rootfs}" systemctl enable systemd-resolved.service
+    systemctl --root "${rootfs}" enable systemd-networkd.service
+    systemctl --root "${rootfs}" enable systemd-resolved.service
 
     ln -frs "${rootfs}/usr/lib/systemd/network/89-ethernet.network.example" \
         "${rootfs}/etc/systemd/network/80-ethernet.network"
