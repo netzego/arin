@@ -30,30 +30,34 @@ declare -g VOLUME="${1:-${VOLUME:-}}"
 source "${SCRIPTDIR}/inc/warning.sh"
 warning
 
-# set $VOLUME
-if [[ ! -e ${VOLUME} ]]; then
-    err 255 "'${VOLUME}' do not exist."
-fi
-if [[ -f ${VOLUME} ]]; then
-    if [[ $(file -b --mime-encoding "${VOLUME}") != "binary" ]]; then
-        err 255 "'${VOLUME}' is not a binary file."
+function set_volume() {
+    declare -g VOLUME="${1:-${VOLUME:-}}"
+    # set $VOLUME
+    if [[ ! -e ${VOLUME} ]]; then
+        err 255 "'${VOLUME}' do not exist."
     fi
-    declare -gr BACKFILE="${VOLUME}"
-    if losetup -nO BACK-FILE | grep -q "${BACKFILE}"; then
-        err 255 "'${VOLUME}' is already a back file. try \`losetup -D\`."
+    if [[ -f ${VOLUME} ]]; then
+        if [[ $(file -b --mime-encoding "${VOLUME}") != "binary" ]]; then
+            err 255 "'${VOLUME}' is not a binary file."
+        fi
+        declare -gr BACKFILE="${VOLUME}"
+        if losetup -nO BACK-FILE | grep -q "${BACKFILE}"; then
+            err 255 "'${VOLUME}' is already a back file. try \`losetup -D\`."
+        fi
+        VOLUME="$(losetup --show --find "${VOLUME}")"
+        partprobe "${VOLUME}"
+        sync
+    elif [[ ! -b ${VOLUME} ]]; then
+        err 255 "'${VOLUME}' is not a block nor a binary file."
     fi
-    VOLUME="$(losetup --show --find "${VOLUME}")"
-    partprobe "${VOLUME}"
-    sync
-elif [[ ! -b ${VOLUME} ]]; then
-    err 255 "'${VOLUME}' is not a block nor a binary file."
-fi
-declare -gr VOLUME
-log "VOLUME='${VOLUME}'"
-# check if volume is mounted
-if lsblk -Pno MOUNTPOINT "${VOLUME}" | grep -qv '=""'; then
-    err 255 "'${VOLUME}' is mounted"
-fi
+    declare -gr VOLUME
+    log "VOLUME='${VOLUME}'"
+    # check if volume is mounted
+    if lsblk -Pno MOUNTPOINT "${VOLUME}" | grep -qv '=""'; then
+        err 255 "'${VOLUME}' is mounted"
+    fi
+}
+set_volume "$@"
 
 mkdir -p "${MOUNTDIR}"
 
