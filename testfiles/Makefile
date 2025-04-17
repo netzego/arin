@@ -18,15 +18,8 @@ null.img:
 empty.img:
 	truncate -s1G $@
 
-keep.img:
+$(IMAGE):
 	truncate -s$(IMAGE_SIZE) $@
-	sgdisk -Z $@
-	sgdisk --new=0:0:+$(ESP_SIZE) --typecode=1:ef00 $@
-	sgdisk --new=0:0:+100M --typecode=1:8304 $@
-	sgdisk --new=0:0:0 --typecode=1:8304 $@
-	sgdisk -p $@
-	partprobe $@
-	sync
 
 $(ISO):
 	curl -LO https://geo.mirror.pkgbuild.com/iso/latest/$@
