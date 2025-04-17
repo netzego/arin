@@ -25,10 +25,8 @@ $(ISO):
 	curl -LO https://geo.mirror.pkgbuild.com/iso/latest/$@
 	curl -LO https://geo.mirror.pkgbuild.com/iso/latest/$@.sig
 
-verify:
-	gpg \
-		--keyserver-options auto-key-retrieve \
-		--verify $(ISO).sig $(ISO)
+verify: $(ISO)
+	gpg --keyserver-options auto-key-retrieve --verify $<.sig $<
 
 $(OVMF_IMAGE):
 	cp /usr/share/edk2-ovmf/x64/$@ .
@@ -36,7 +34,12 @@ $(OVMF_IMAGE):
 $(OVMF_VARS):
 	cp /usr/share/edk2-ovmf/x64/$@ .
 
-install: $(OVMF_IMAGE) $(OVMF_VARS) $(ISO)
+dist_clean:
+	rm -fr $(IMAGE)
+	rm -fr $(OVMF_IMAGE)
+	rm -fr $(OVMF_VARS)
+	rm -fr $(ISO)
+	rm -fr $(ISO).sig
 	qemu-system-x86_64 $(QARGS) \
 		-device bochs-display \
 		-drive if=pflash,format=raw,unit=0,readonly=on,file=$(OVMF_IMAGE) \
