@@ -32,10 +32,10 @@ declare -gra BTRFS_SUBVOLUMES=(
     "@machines:/var/lib/machines"
     "@portables:/var/lib/portables"
     "@pkg:/var/cache/pacman/pkg"
-    #"@root:/root"
-    "@snapshots:/snapshots"
     "@srv:/srv"
     "@swap:/swap"
+    #"@root:/root"
+    #"@snapshots:/snapshots"
 )
 
 declare -gr BATCH="${BATCH:-no}"
