@@ -40,7 +40,7 @@ if [[ -f ${VOLUME} ]]; then
     fi
     declare -gr BACKFILE="${VOLUME}"
     if losetup -nO BACK-FILE | grep -q "${BACKFILE}"; then
-        err 255 "'${VOLUME}' is already a back file. try \`losetup -D\`"
+        err 255 "'${VOLUME}' is already a back file. try \`losetup -D\`."
     fi
     VOLUME="$(losetup --show --find "${VOLUME}")"
     partprobe "${VOLUME}"
