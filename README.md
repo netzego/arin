@@ -1,11 +1,10 @@
 An opinionated archlinux installer
 
 ### Usage
-```sh
-resolvectl query archlinux.org
-timedatectl
-mount -o remount,size=4G /run/archiso/cowspace
-bash -x ./arin.sh $VOLUME |& tee -p $LOGFILE
+```console
+# mount -o remount,size=4G /run/archiso/cowspace
+# git clone --depth=1 https://github.com/netzego/arin.git && cd arin
+# bash -x ./arin.sh $VOLUME |& tee -p $LOGFILE
 ```
 
 ### Files
