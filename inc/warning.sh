@@ -9,7 +9,7 @@ function warning() {
     log "note that this programm come without any warranty."
     log "The following path (device or file) will be deleted."
     log ""
-    log "$(realpath "${VOLUME}")"
+    log "$(realpath "${1}")"
     log ""
     # log "${SCRIPTNAME} $()${VOLUME}"
     if [[ ${BATCH} != yes ]]; then
