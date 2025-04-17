@@ -9,11 +9,10 @@ IMAGE       ?= test.img
 IMAGE_SIZE  := 4G
 QARGS       := -M q35 -enable-kvm -cpu host -m 4G -smp 4 -nodefaults -no-user-config
 
-.PHONY:    \
-	boot   \
-	nogra  \
+.PHONY: \
+	dist_clean \
 	verify \
-	install
+	qemu_install
 
 $(IMAGE):
 	truncate -s$(IMAGE_SIZE) $@
