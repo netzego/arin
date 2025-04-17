@@ -2,5 +2,5 @@
 # shellcheck disable=SC2154
 
 function configure_sshd() {
-    systemd-nspawn -D "${MOUNTDIR}" systemctl enable sshd.service
+    systemctl --root "${MOUNTDIR}" enable sshd.service
 }
