@@ -17,11 +17,13 @@ QARGS       := -M q35 -enable-kvm -cpu host -m 4G -smp 4 -nodefaults -no-user-co
 $(IMAGE):
 	truncate -s$(IMAGE_SIZE) $@
 
+$(ISO).sig:
+	curl -LO https://geo.mirror.pkgbuild.com/iso/latest/$@
+
 $(ISO):
 	curl -LO https://geo.mirror.pkgbuild.com/iso/latest/$@
-	curl -LO https://geo.mirror.pkgbuild.com/iso/latest/$@.sig
 
-verify: $(ISO)
+verify: $(ISO) $(ISO).sig
 	gpg --keyserver-options auto-key-retrieve --verify $<.sig $<
 
 $(OVMF_IMAGE):
