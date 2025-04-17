@@ -63,23 +63,3 @@ keep.img:
 	sgdisk -p $@
 	partprobe $@
 	sync
-
-boot: $(OVMF_IMAGE) $(OVMF_VARS) $(ISO)
-	qemu-system-x86_64 $(QARGS) \
-		-device bochs-display \
-		-nic user,model=virtio-net-pci \
-		-drive if=pflash,format=raw,unit=0,readonly=on,file=$(OVMF_IMAGE) \
-		-drive if=pflash,format=raw,unit=1,readonly=off,file=$(OVMF_VARS) \
-		-drive id=test,file=$(IMAGE),format=raw,if=virtio
-
-nogra: $(OVMF_IMAGE) $(OVMF_VARS) $(ISO)
-	qemu-system-x86_64 $(QARGS) \
-		-nodefaults \
-		-no-user-config \
-		-nographic \
-		-serial mon:stdio \
-		-nic user,model=virtio-net-pci \
-		-drive if=pflash,format=raw,unit=0,readonly=on,file=$(OVMF_IMAGE) \
-		-drive if=pflash,format=raw,unit=1,readonly=off,file=$(OVMF_VARS) \
-		-smbios "type=11,value=io.systemd.stub.kernel-cmdline-extra=${CMDLINE_EXTRA}" \
-		-drive id=test,file=$(IMAGE),format=raw,if=virtio
