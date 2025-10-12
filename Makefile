@@ -10,10 +10,9 @@ IMAGE        ?= testfiles/test.img
 
 .PHONY: \
 	check \
-	debug \
-	test \
-	watch \
-	run
+	image \
+	image_debug \
+	test
 
 check: $(SCRIPTNAME)
 	shellcheck -x --enable=all $<
