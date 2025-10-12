@@ -1,7 +1,8 @@
-arin.roothash
+arin.authorized_keys
 arin.keyfile
-**/*.img
+arin.roothash
+logfile
 **/*.fd
+**/*.img
 **/*.iso
 **/*.sig
-logfile
