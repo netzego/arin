@@ -3,11 +3,8 @@ base
 btrfs-progs
 dosfstools
 gptfdisk
-iptables-nft
 linux-firmware
 linux-lts
 mkinitcpio
 openssh
-python
-rsync
 vi
