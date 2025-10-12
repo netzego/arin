@@ -26,5 +26,15 @@ image: $(SCRIPTNAME) $(IMAGE)
 image_debug: $(SCRIPTNAME) $(IMAGE)
 	bash -x $< $(IMAGE) |& tee -p $(LOGFILE)
 
-arin.roothash:
+.FORCE:
+
+$(IMAGE):
+	truncate -s4G $@
+
+arin.roothash: .FORCE
 	@mkpasswd -m yescrypt >$@
+	@chmod 400 $@
+
+arin.keyfile: .FORCE
+	@systemd-ask-password -n >$@
+	@chmod 400 $@
