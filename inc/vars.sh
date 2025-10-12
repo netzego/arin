@@ -34,8 +34,8 @@ declare -gra BTRFS_SUBVOLUMES=(
     "@pkg:/var/cache/pacman/pkg"
     "@srv:/srv"
     "@swap:/swap"
+    "@snapshots:/snapshots"
     #"@root:/root"
-    #"@snapshots:/snapshots"
 )
 
 declare -gr BATCH="${BATCH:-no}"
