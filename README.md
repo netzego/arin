@@ -1,5 +1,11 @@
 An opinionated archlinux installer
 
+<!--
+### Dependencies
+- make
+- whois (mkpasswd)
+-->
+
 ### Usage
 ```console
 # mount -o remount,size=4G /run/archiso/cowspace
