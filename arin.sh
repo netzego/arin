@@ -148,7 +148,7 @@ function copy_skeleton() {
     declare -r skel="${SCRIPTDIR}/arin.skeleton"
 
     if [[ -d "${skel}" ]]; then
-        rsync -av "${skel}/" "${MOUNTDIR}"
+        rsync -av --chown=root:root "${skel}/" "${MOUNTDIR}"
     fi
 }
 copy_skeleton
