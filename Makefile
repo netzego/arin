@@ -20,10 +20,10 @@ check: $(SCRIPTNAME)
 test: tests/
 	@bats $(BATS_OPTIONS) -r tests/$(BATS_GLOB)
 
-run: $(SCRIPTNAME)
+image: $(SCRIPTNAME) $(IMAGE)
 	bash $< $(IMAGE) |& tee -p $(LOGFILE)
 
-debug: $(SCRIPTNAME)
+image_debug: $(SCRIPTNAME) $(IMAGE)
 	bash -x $< $(IMAGE) |& tee -p $(LOGFILE)
 
 arin.roothash:
