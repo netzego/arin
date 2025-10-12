@@ -15,9 +15,13 @@ install_packages() {
     fi
 
     # shellcheck disable=SC2086,SC2048
-    pacstrap -cGM "${rootdir}" ${pkgs[*]}
+    # TODO: 2025-10-12
+    # `-c` uses the host systems cache file, which saves space
+    # but this fails on an usbstick boot
+    # possible sollution is to use a working dir in the repo dir
+    pacstrap -GM "${rootdir}" ${pkgs[*]}
 
     if [[ -n "${cpu}" ]]; then
-        pacstrap -cGM "${rootdir}" "${cpu}-ucode"
+        pacstrap -GM "${rootdir}" "${cpu}-ucode"
     fi
 }
