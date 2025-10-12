@@ -22,7 +22,7 @@ declare -gr SIZE_SWAPFILE="128m"
 # declare -gr SIZE_WINRESCUE="128M" # TODO change me
 # declare -gr SIZE_WINRESERVED="16M"
 
-filearray "PACKAGES" "${SCRIPTDIR}/inc/core.packages" "${PWD}/${SCRIPTNAME}.packages"
+filearray "PACKAGES" "${SCRIPTDIR}/inc/core.packages" "${PWD}/arin.packages"
 declare -gr BTRFS_MOUNT_OPTIONS="noatime,compress=zstd"
 declare -gra BTRFS_SUBVOLUMES=(
     # subvol:mountpoint
