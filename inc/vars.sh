@@ -34,7 +34,7 @@ declare -gra BTRFS_SUBVOLUMES=(
     "@pkg:/var/cache/pacman/pkg"
     "@srv:/srv"
     "@swap:/swap"
-    "@snapshots:/snapshots"
+    #"@snapshots:/snapshots"
     #"@root:/root"
 )
 
