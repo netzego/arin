@@ -1,5 +1,7 @@
-# iw
-# iwd
-python
+fwupd
+iw
+iwd
 neovim
-# zsh
+python
+rsync
+#zsh
