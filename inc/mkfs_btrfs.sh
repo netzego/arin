@@ -3,7 +3,7 @@
 function mkfs_btrfs() {
     declare subvol
     declare subdir
-    mkfs.btrfs -f "${ROOT_PATH}"
+    mkfs.btrfs -f -O ^quota "${ROOT_PATH}"
     # <FS-ROOT>
     mount -o "${BTRFS_MOUNT_OPTIONS}" "${ROOT_PATH}" "${MOUNTDIR}"
     for s in "${BTRFS_SUBVOLUMES[@]}"; do
