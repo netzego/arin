@@ -6,5 +6,7 @@ gptfdisk
 linux-firmware
 linux-lts
 mkinitcpio
+nftables
 openssh
+polkit
 vi
