@@ -7,6 +7,7 @@ function configure_initrd() {
         base
         systemd
         autodetect
+        microcode
         modconf
         kms
         keyboard
